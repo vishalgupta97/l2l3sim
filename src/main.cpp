@@ -38,6 +38,30 @@ void check_inclusive()
 	}
 }
 
+void check_exclusive()
+{
+	for (unsigned int l2set = 0; l2set < l2.num_set; l2set++)
+	{
+		for (unsigned int l2way = 0; l2way < l2.num_way; l2way++)
+		{
+			if (l2.block[l2set][l2way].valid)
+			{
+				int l3set = l3.get_set(l2.block[l2set][l2way].addr);
+				unsigned long l3tag = l2.block[l2set][l2way].addr >> l3.log2_num_set;
+				int match = -1;
+
+				for (unsigned int l3way = 0; l3way < l3.num_way; l3way++)
+					if (l3.block[l3set][l3way].valid && l3.block[l3set][l3way].tag == l3tag)
+					{
+						match = 1;
+						break;
+					}
+				assert(match == -1);
+			}
+		}
+	}
+}
+
 void operate()
 {
 	int way = -1;
@@ -86,6 +110,9 @@ void operate()
 		{
 #ifdef INCLUSIVE
 			check_inclusive();
+#endif
+#ifdef EXCLUSIVE
+			check_exclusive();
 #endif
 		}
 	}

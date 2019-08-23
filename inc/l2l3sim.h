@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include "config.h"
 using namespace std;
 
 #define MAX_TRACE_SIZE 15400000
@@ -11,7 +12,6 @@ using namespace std;
 #define L3_SET 2048
 #define L3_WAY 16
 
-#define INCLUSIVE
 
 class MEMORY_ACCESS
 {
