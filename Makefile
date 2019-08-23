@@ -10,7 +10,7 @@ inc = inc
 
 debug = 1
 
-CFlags = -Wall -O3
+CFlags = -Wall -O0
 LDFlags =
 libs =
 libDir =

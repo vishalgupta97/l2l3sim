@@ -39,7 +39,7 @@ int CACHE::check_hit(unsigned long long address)
 
 int CACHE::get_set(unsigned long long address)
 {
-	return address && ((1 << log2_num_set) - 1);
+	return address & ((1 << log2_num_set) - 1);
 }
 
 void CACHE::update_replacement_state(int set, int way)
@@ -62,12 +62,14 @@ int CACHE::get_eviction_way(int set)
 			lru_index = i;
 	}
 
+	assert(block[set][lru_index].lru == num_way - 1);
+
 	return lru_index;
 }
 
 void CACHE::add_data(unsigned long long address)
 {
-	unsigned long set = address && ((1 << log2_num_set) - 1);
+	unsigned long set = get_set(address);
 	unsigned long tag = address >> log2_num_set;
 
 	unsigned long way = get_eviction_way(set);
