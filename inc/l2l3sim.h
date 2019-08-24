@@ -11,7 +11,8 @@ using namespace std;
 #define L2_WAY 8
 #define L3_SET 2048
 #define L3_WAY 16
-
+#define belady_optimal // run belady's optimal algorithm on LLC
+		       // comment this to run LRU on LLC
 
 class MEMORY_ACCESS
 {
@@ -28,4 +29,5 @@ public:
 
 extern MEMORY_ACCESS* access_trace;
 extern int num_memory_access;
+extern int curr_memory_access;
 

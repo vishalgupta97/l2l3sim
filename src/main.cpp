@@ -2,7 +2,7 @@
 #include "cache.h"
 
 MEMORY_ACCESS* access_trace;
-int num_memory_access;
+int num_memory_access, curr_memory_access;
 CACHE l2, l3;
 
 void initialize()
@@ -65,10 +65,10 @@ void check_exclusive()
 void operate()
 {
 	int way = -1;
-	for (int i = 0; i < num_memory_access; i++)
+	for (curr_memory_access = 0; curr_memory_access < num_memory_access; curr_memory_access++)
 	{
-		unsigned long long address = access_trace[i].addr;
-		if (access_trace[i].type != 0) //L1 miss
+		unsigned long long address = access_trace[curr_memory_access].addr;
+		if (access_trace[curr_memory_access].type != 0) //L1 miss
 		{
 			way = l2.check_hit(address);
 			if (way != -1) // L2 hit
@@ -106,7 +106,7 @@ void operate()
 			}
 		}
 
-		if (i % 1000 == 0)
+		if (curr_memory_access % 1000 == 0)
 		{
 #ifdef INCLUSIVE
 			check_inclusive();
