@@ -57,37 +57,33 @@ int CACHE::get_eviction_way(int set)
                         return i;
 if( type == LLC ){
 #ifdef belady_optimal
-	int access_distance[L3_WAY],dummy_curr_mem_access;  //After how many accesses current way is accessed
+	int access_distance[L3_WAY],way_checked=0;  
 	unsigned long long dummy_address;
 	for (int i = 0; i < L3_WAY; i++)
 		access_distance[i] = -1;
+	for (int dummy_curr_mem_access = curr_memory_access; dummy_curr_mem_access < num_memory_access ; dummy_curr_mem_access++){
+		dummy_address = access_trace[dummy_curr_mem_access].addr;
 
-	for (int i = 0; i < L3_WAY; i++){
-		dummy_address = block[set][i].addr;
-		dummy_curr_mem_access=curr_memory_access;
-		while(dummy_curr_mem_access < num_memory_access){
-			if(access_trace[dummy_curr_mem_access].addr == dummy_address){
-				access_distance[i] = dummy_curr_mem_access - curr_memory_access;
-				dummy_curr_mem_access = num_memory_access;
+		for (int curr_way = 0; curr_way < L3_WAY; curr_way++)
+
+			if(dummy_address == block[set][curr_way].addr && access_distance[curr_way] == -1){
+				access_distance[curr_way] = dummy_curr_mem_access - curr_memory_access;
+				curr_way = L3_WAY;
+				way_checked++;
 			}
-			dummy_curr_mem_access++;
-		}
-	
+			
+		
+		
+		if( way_checked == L3_WAY-1 )
+			dummy_curr_mem_access = num_memory_access;
+		cout<<"set:"<<set<<" way_checked:"<<way_checked<<" current:"<<curr_memory_access<<" total: "<<num_memory_access<<" checking for:"<<dummy_curr_mem_access<<endl;
+
 	}
-	
+
 	for (int i = 0; i < L3_WAY; i++)
 		if(access_distance[i] == -1)
 			return i;
-
-	int max_distance = access_distance[0], max_way=0;
-
-
-	for (int i = 1; i < L3_WAY; i++)
-		if(access_distance[i] > max_distance){
-			max_way = i;
-			max_distance = access_distance[i];
-		}
-	return max_way;	
+	
 #endif
 }
 

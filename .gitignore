@@ -1,4 +1,6 @@
 bin/
 obj/
 traces/
+a.out
+sample.cpp
 

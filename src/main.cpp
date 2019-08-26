@@ -115,6 +115,10 @@ void operate()
 			check_exclusive();
 #endif
 		}
+		if(curr_memory_access % 100000 == 0)
+		{
+			cout<< curr_memory_access<<endl;
+		}
 	}
 }
 
@@ -130,6 +134,12 @@ int main(int argc, char** argv)
 #ifdef EXCLUSIVE
 	cout << "L2 EXCLUSIVE of L3" << endl;
 #endif
+#ifdef belady_optimal
+	cout<<"Belady at L3"<<endl;
+#else
+	cout<<"LRU at L3"<<endl;
+#endif
+
 
 	initialize();
 

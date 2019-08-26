@@ -28,6 +28,5 @@ public:
 };
 
 extern MEMORY_ACCESS* access_trace;
-extern int num_memory_access;
-extern int curr_memory_access;
+extern int num_memory_access, curr_memory_access;
 
