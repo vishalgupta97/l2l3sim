@@ -3,6 +3,7 @@
 
 MEMORY_ACCESS* access_trace;
 int num_memory_access, curr_memory_access;
+map <unsigned long long, set <int> > addr_index;
 CACHE l2, l3;
 
 void initialize()
@@ -63,7 +64,37 @@ void check_exclusive()
 }
 
 void operate()
-{
+{	
+	cout <<"total memory accesses"<<num_memory_access<<endl;
+	set <int> addr_set;
+#ifdef belady_optimal
+	for (curr_memory_access = 0; curr_memory_access < num_memory_access; curr_memory_access++){
+                unsigned long long address = access_trace[curr_memory_access].addr;
+		auto itr = addr_index.find(address);
+		if(itr == addr_index.end()){
+			addr_set.clear();
+			addr_set.insert(curr_memory_access);
+			addr_index.insert(make_pair(address,addr_set));
+		}
+		else
+			itr->second.insert(curr_memory_access);
+		
+	}
+
+	map <unsigned long long, set <int> >::iterator itr;
+	int sum = 0;
+	for (itr = addr_index.begin(); itr != addr_index.end(); ++itr) {
+        	sum += itr->second.size();
+		//cout<<"Address: " << itr->first<<endl;
+		for (auto it = itr->second.begin();it != itr->second.end(); ++it){
+			//cout<<*it<<" ";
+		}
+		//cout<<endl;
+
+    }
+    assert(sum==num_memory_access);
+
+#endif
 	int way = -1;
 	for (curr_memory_access = 0; curr_memory_access < num_memory_access; curr_memory_access++)
 	{
@@ -115,10 +146,10 @@ void operate()
 			check_exclusive();
 #endif
 		}
-		if(curr_memory_access % 100000 == 0)
+		/*if(curr_memory_access % 100000 == 0)
 		{
 			cout<< curr_memory_access<<endl;
-		}
+		}*/
 	}
 }
 
