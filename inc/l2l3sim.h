@@ -9,10 +9,10 @@ using namespace std;
 
 #define L2_SET 1024
 #define L2_WAY 8
-#define L3_SET 2048
-#define L3_WAY 16
+#define L3_SET 1 // 2048
+#define L3_WAY 32768 //16
 
-#define belady_optimal // run belady's optimal algorithm on LLC
+//#define belady_optimal // run belady's optimal algorithm on LLC
 		       // comment this to run LRU on LLC
 
 class MEMORY_ACCESS

@@ -64,8 +64,7 @@ void check_exclusive()
 }
 
 void operate()
-{	
-	cout <<"total memory accesses"<<num_memory_access<<endl;
+{
 	set <int> addr_set;
 #ifdef belady_optimal
 	for (curr_memory_access = 0; curr_memory_access < num_memory_access; curr_memory_access++){
@@ -78,7 +77,7 @@ void operate()
 		}
 		else
 			itr->second.insert(curr_memory_access);
-		
+
 	}
 
 	map <unsigned long long, set <int> >::iterator itr;
@@ -146,10 +145,10 @@ void operate()
 			check_exclusive();
 #endif
 		}
-		/*if(curr_memory_access % 100000 == 0)
+		if (curr_memory_access % 100000 == 0)
 		{
 			cout<< curr_memory_access<<endl;
-		}*/
+		}
 	}
 }
 

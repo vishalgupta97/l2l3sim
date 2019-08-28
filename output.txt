@@ -1,0 +1,180 @@
+bzip2.log_l1misstrace inclusive
+L2 INCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 11269773
+Total unique accesses / Cold misses: 119754 percent: 1.06261
+L2 hits: 5259459
+L2 miss: 5398166
+L3 hits: 3951778
+L3 miss: 1446388
+L3 back-invalidation requests: 1413620
+bzip2.log_l1misstrace noninclusive
+L2 NONINCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 11269773
+Total unique accesses / Cold misses: 119754 percent: 1.06261
+L2 hits: 5260049
+L2 miss: 5397576
+L3 hits: 3951730
+L3 miss: 1445846
+L3 back-invalidation requests: 0
+bzip2.log_l1misstrace exclusive
+L2 EXCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 11269773
+Total unique accesses / Cold misses: 119754 percent: 1.06261
+L2 hits: 5260049
+L2 miss: 5397576
+L3 hits: 4467665
+L3 miss: 929911
+L3 back-invalidation requests: 0
+gcc.log_l1misstrace inclusive
+L2 INCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 15388029
+Total unique accesses / Cold misses: 773054 percent: 5.02374
+L2 hits: 11574348
+L2 miss: 3036461
+L3 hits: 1663059
+L3 miss: 1373402
+L3 back-invalidation requests: 1340634
+gcc.log_l1misstrace noninclusive
+L2 NONINCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 15388029
+Total unique accesses / Cold misses: 773054 percent: 5.02374
+L2 hits: 11581000
+L2 miss: 3029809
+L3 hits: 1663561
+L3 miss: 1366248
+L3 back-invalidation requests: 0
+gcc.log_l1misstrace exclusive
+L2 EXCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 15388029
+Total unique accesses / Cold misses: 773054 percent: 5.02374
+L2 hits: 11581000
+L2 miss: 3029809
+L3 hits: 1779447
+L3 miss: 1250362
+L3 back-invalidation requests: 0
+gromacs.log_l1misstrace inclusive
+L2 INCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 3927468
+Total unique accesses / Cold misses: 107963 percent: 2.74892
+L2 hits: 3094660
+L2 miss: 336851
+L3 hits: 166320
+L3 miss: 170531
+L3 back-invalidation requests: 137763
+gromacs.log_l1misstrace noninclusive
+L2 NONINCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 3927468
+Total unique accesses / Cold misses: 107963 percent: 2.74892
+L2 hits: 3094787
+L2 miss: 336724
+L3 hits: 166265
+L3 miss: 170459
+L3 back-invalidation requests: 0
+gromacs.log_l1misstrace exclusive
+L2 EXCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 3927468
+Total unique accesses / Cold misses: 107963 percent: 2.74892
+L2 hits: 3094787
+L2 miss: 336724
+L3 hits: 176960
+L3 miss: 159764
+L3 back-invalidation requests: 0
+h264ref.log_l1misstrace inclusive
+L2 INCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 2368109
+Total unique accesses / Cold misses: 63704 percent: 2.69008
+L2 hits: 1378894
+L2 miss: 969678
+L3 hits: 627532
+L3 miss: 342146
+L3 back-invalidation requests: 309378
+h264ref.log_l1misstrace noninclusive
+L2 NONINCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 2368109
+Total unique accesses / Cold misses: 63704 percent: 2.69008
+L2 hits: 1382948
+L2 miss: 965624
+L3 hits: 632041
+L3 miss: 333583
+L3 back-invalidation requests: 0
+h264ref.log_l1misstrace exclusive
+L2 EXCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 2368109
+Total unique accesses / Cold misses: 63704 percent: 2.69008
+L2 hits: 1382948
+L2 miss: 965624
+L3 hits: 807595
+L3 miss: 158029
+L3 back-invalidation requests: 0
+hmmer.log_l1misstrace inclusive
+L2 INCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 3516421
+Total unique accesses / Cold misses: 75885 percent: 2.15802
+L2 hits: 1766343
+L2 miss: 1743421
+L3 hits: 1352195
+L3 miss: 391226
+L3 back-invalidation requests: 358458
+hmmer.log_l1misstrace noninclusive
+L2 NONINCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 3516421
+Total unique accesses / Cold misses: 75885 percent: 2.15802
+L2 hits: 1774442
+L2 miss: 1735322
+L3 hits: 1358978
+L3 miss: 376344
+L3 back-invalidation requests: 0
+hmmer.log_l1misstrace exclusive
+L2 EXCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 3516421
+Total unique accesses / Cold misses: 75885 percent: 2.15802
+L2 hits: 1774442
+L2 miss: 1735322
+L3 hits: 1427098
+L3 miss: 308224
+L3 back-invalidation requests: 0
+sphinx3.log_l1misstrace inclusive
+L2 INCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 10924045
+Total unique accesses / Cold misses: 122070 percent: 1.11744
+L2 hits: 1933096
+L2 miss: 8820349
+L3 hits: 612987
+L3 miss: 8207362
+L3 back-invalidation requests: 8174594
+sphinx3.log_l1misstrace noninclusive
+L2 NONINCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 10924045
+Total unique accesses / Cold misses: 122070 percent: 1.11744
+L2 hits: 1938315
+L2 miss: 8815130
+L3 hits: 609986
+L3 miss: 8205144
+L3 back-invalidation requests: 0
+sphinx3.log_l1misstrace exclusive
+L2 EXCLUSIVE of L3
+LRU at L3
+Total L2 accesses: 10924045
+Total unique accesses / Cold misses: 122070 percent: 1.11744
+L2 hits: 1938315
+L2 miss: 8815130
+L3 hits: 1521809
+L3 miss: 7293321
+L3 back-invalidation requests: 0

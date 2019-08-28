@@ -7,7 +7,7 @@ num_traces=(2 2 1 1 1 2)
 if [ ${1} = 6 ]; then
 	for i in `seq 0 5`
 	do
-		for $cf in ${config[@]}
+		for cf in ${config[@]}
 		do
 			echo ${traces[${i}]} $cf
 			./bin/l2l3sim-$cf ${trace_dir}/${traces[${i}]} ${num_traces[${i}]}
