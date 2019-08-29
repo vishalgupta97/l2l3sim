@@ -8,33 +8,16 @@ void CACHE::init(int type, int num_set, int num_way)
 	this->num_way = num_way;
 	this->log2_num_set = (int) log2(num_set);
 
-	block = new BLOCK*[num_set];
-	for (int i = 0; i < num_set; i++)
-	{
-		block[i] = new BLOCK[num_way];
-		for (int j = 0; j < num_way; j++)
-		{
-			block[i][j].lru = j;
-			block[i][j].valid = false;
-		}
-	}
+	sets = new list<unsigned long long> [num_set];
 
 	miss = 0;
 	hit = 0;
 }
 
-int CACHE::check_hit(unsigned long long address)
+bool CACHE::check_hit(unsigned long long address)
 {
 	unsigned long set = get_set(address);
-	unsigned long tag = address >> log2_num_set;
-
-	for (unsigned int i = 0; i < num_way; i++)
-		if (block[set][i].valid && block[set][i].tag == tag)
-		{
-			return i;
-		}
-
-	return -1;
+	return find(sets[set].begin(), sets[set].end(), address) != sets[set].end();
 }
 
 int CACHE::get_set(unsigned long long address)
@@ -42,15 +25,17 @@ int CACHE::get_set(unsigned long long address)
 	return address & ((1 << log2_num_set) - 1);
 }
 
-void CACHE::update_replacement_state(int set, int way)
+void CACHE::update_replacement_state(unsigned long long address)
 {
-	for (unsigned int i = 0; i < num_way; i++)
-		if (block[set][i].lru < block[set][way].lru)
-			block[set][i].lru++;
-	block[set][way].lru = 0;
+	unsigned long set = get_set(address);
+	auto it = find(sets[set].begin(), sets[set].end(), address);
+	sets[set].erase(it);
+	sets[set].push_front(address);
+
+	assert(sets[set].size() <= num_way);
 }
 
-int CACHE::get_eviction_way(int set)
+/*int CACHE::get_eviction_way(int set)
 {
 	for(unsigned int i = 0; i< num_way; i++)//Common for belady and LRU
 		if (!block[set][i].valid)
@@ -70,7 +55,7 @@ if( type == LLC ){
 			}
 		}
 	}
-	
+
 	int max = 0,return_way;
         for (unsigned int i = 0; i < num_way; i++){
 		if(access_index[i] > max){
@@ -94,41 +79,53 @@ if( type == LLC ){
 	assert(block[set][lru_index].lru == num_way - 1);
 
 	return lru_index;
-}
+ }*/
 
 void CACHE::add_data(unsigned long long address)
 {
 	unsigned long set = get_set(address);
-	unsigned long tag = address >> log2_num_set;
+	long long evicted_addr = -1;
 
-	unsigned long way = get_eviction_way(set);
+	//New address is added at MRU position
+	if (sets[set].size() < num_way)
+	{
+		sets[set].push_front(address);
+	}
+	else
+	{
+		auto it = sets[set].end();
+		it--;
+		evicted_addr = *it;
+		sets[set].erase(it);
+		sets[set].push_front(address);
+	}
+
+	assert(sets[set].size() <= num_way);
 
 #ifdef INCLUSIVE
-	if (type == LLC && block[set][way].valid)
+	if (type == LLC && evicted_addr != -1)
 	{
-		l2.invalidate_data(block[set][way].addr);
+		l2.invalidate_data(evicted_addr);
 		back_invalidation++;
 	}
 #endif
 
 #ifdef EXCLUSIVE
-	if(type == L2C && block[set][way].valid)
+	if (type == L2C && evicted_addr != -1)
 	{
-		l3.add_data(block[set][way].addr);
+		l3.add_data(evicted_addr);
 	}
 #endif
 
-	update_replacement_state(set, way);
-	block[set][way].tag = tag;
-	block[set][way].addr = address;
-	block[set][way].valid = true;
 }
 
 void CACHE::invalidate_data(unsigned long long address)
 {
 	int set = get_set(address);
-	unsigned long tag = address >> log2_num_set;
-	for (unsigned int i = 0; i < num_way; i++)
-		if (block[set][i].valid && block[set][i].tag == tag)
-			block[set][i].valid = false;
+	auto it = find(sets[set].begin(), sets[set].end(), address);
+
+	if (it != sets[set].end())
+		sets[set].erase(it);
+
+	assert(sets[set].size() <= num_way);
 }

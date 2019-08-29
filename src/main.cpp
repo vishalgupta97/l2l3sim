@@ -19,22 +19,16 @@ void check_inclusive()
 {
 	for (unsigned int l2set = 0; l2set < l2.num_set; l2set++)
 	{
-		for (unsigned int l2way = 0; l2way < l2.num_way; l2way++)
+		if (l2.sets[l2set].size() > l2.num_way)
 		{
-			if (l2.block[l2set][l2way].valid)
-			{
-				int l3set = l3.get_set(l2.block[l2set][l2way].addr);
-				unsigned long l3tag = l2.block[l2set][l2way].addr >> l3.log2_num_set;
-				int match = -1;
+			cout << l2set << " " << l2.sets[l2set].size() << endl;
+			assert(l2.sets[l2set].size() <= l2.num_way);
+		}
+		for (auto l2addr_it = l2.sets[l2set].begin(); l2addr_it != l2.sets[l2set].end(); l2addr_it++)
+		{
+			int l3set = l3.get_set(*l2addr_it);
 
-				for (unsigned int l3way = 0; l3way < l3.num_way; l3way++)
-					if (l3.block[l3set][l3way].valid && l3.block[l3set][l3way].tag == l3tag)
-					{
-						match = 1;
-						break;
-					}
-				assert(match == 1);
-			}
+			assert(find(l3.sets[l3set].begin(), l3.sets[l3set].end(), *l2addr_it) != l3.sets[l3set].end());
 		}
 	}
 }
@@ -42,25 +36,14 @@ void check_inclusive()
 void check_exclusive()
 {
 	for (unsigned int l2set = 0; l2set < l2.num_set; l2set++)
-	{
-		for (unsigned int l2way = 0; l2way < l2.num_way; l2way++)
 		{
-			if (l2.block[l2set][l2way].valid)
+		for (auto l2addr_it = l2.sets[l2set].begin(); l2addr_it != l2.sets[l2set].end(); l2addr_it++)
 			{
-				int l3set = l3.get_set(l2.block[l2set][l2way].addr);
-				unsigned long l3tag = l2.block[l2set][l2way].addr >> l3.log2_num_set;
-				int match = -1;
+			int l3set = l3.get_set(*l2addr_it);
 
-				for (unsigned int l3way = 0; l3way < l3.num_way; l3way++)
-					if (l3.block[l3set][l3way].valid && l3.block[l3set][l3way].tag == l3tag)
-					{
-						match = 1;
-						break;
-					}
-				assert(match == -1);
+			assert(find(l3.sets[l3set].begin(), l3.sets[l3set].end(), *l2addr_it) == l3.sets[l3set].end());
 			}
 		}
-	}
 }
 
 void operate()
@@ -94,26 +77,25 @@ void operate()
     assert(sum==num_memory_access);
 
 #endif
-	int way = -1;
+
 	for (curr_memory_access = 0; curr_memory_access < num_memory_access; curr_memory_access++)
 	{
 		unsigned long long address = access_trace[curr_memory_access].addr;
 		if (access_trace[curr_memory_access].type != 0) //L1 miss
 		{
-			way = l2.check_hit(address);
-			if (way != -1) // L2 hit
+
+			if (l2.check_hit(address)) // L2 hit
 			{
 				l2.hit++;
-				l2.update_replacement_state(l2.get_set(address), way);
+				l2.update_replacement_state(address);
 			}
 			else // L2 miss
 			{
 				l2.miss++;
-				way = l3.check_hit(address);
-				if (way != -1)
+				if (l3.check_hit(address))
 				{
 					l3.hit++;
-					l3.update_replacement_state(l3.get_set(address), way);
+					l3.update_replacement_state(address);
 					l2.add_data(address);
 
 #ifdef EXCLUSIVE
@@ -134,9 +116,12 @@ void operate()
 #endif
 				}
 			}
+
+			assert(l2.sets[l2.get_set(address)].size() <= l2.num_way);
+			assert(l3.sets[l3.get_set(address)].size() <= l3.num_way);
 		}
 
-		if (curr_memory_access % 1000 == 0)
+		if (curr_memory_access % 100000 == 0)
 		{
 #ifdef INCLUSIVE
 			check_inclusive();
@@ -144,10 +129,7 @@ void operate()
 #ifdef EXCLUSIVE
 			check_exclusive();
 #endif
-		}
-		if (curr_memory_access % 100000 == 0)
-		{
-			cout<< curr_memory_access<<endl;
+			cout << curr_memory_access << endl;
 		}
 	}
 }
@@ -193,7 +175,9 @@ int main(int argc, char** argv)
 
 			access_trace[num_memory_access].addr >>= LOG2_BLOCK_SIZE;
 
+#ifdef belady_optimal
 			unique_addr.insert(access_trace[num_memory_access].addr);
+#endif
 
 			num_memory_access++;
 		}
