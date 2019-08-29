@@ -12,7 +12,7 @@ using namespace std;
 #define L3_SET 1 // 2048
 #define L3_WAY 32768 //16
 
-//#define belady_optimal // run belady's optimal algorithm on LLC
+#define belady_optimal // run belady's optimal algorithm on LLC
 		       // comment this to run LRU on LLC
 
 class MEMORY_ACCESS
