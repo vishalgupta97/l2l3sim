@@ -87,10 +87,14 @@ void CACHE::add_data(unsigned long long address)
 	unsigned long set = get_set(address);
 	long long evicted_addr = -1;
 
-	//New address is added at MRU position
+	//New address is added at MRU position (Front of list) in case of LRU
 	if (sets[set].size() < num_way)
 	{
+#if defined(belady_optimal)
+		sets[set].push_back(address);
+#else
 		sets[set].push_front(address);
+#endif
 	}
 	else
 	{
@@ -100,11 +104,7 @@ void CACHE::add_data(unsigned long long address)
 			it--;
 			evicted_addr = *it;
 			sets[set].erase(it);
-#if defined(belady_optimal)
-			sets[set].push_back(address);
-#else
 			sets[set].push_front(address);
-#endif
 		}
 		else
 		{
