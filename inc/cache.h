@@ -8,7 +8,7 @@ class CACHE
 {
 public:
 	list<unsigned long long> *sets;
-
+	map<int, unsigned long long> *belady_access;
 	unsigned int num_set, num_way, miss, hit, log2_num_set, type, back_invalidation;
 
 	void init(int type, int num_set, int num_way);

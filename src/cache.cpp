@@ -9,6 +9,7 @@ void CACHE::init(int type, int num_set, int num_way)
 	this->log2_num_set = (int) log2(num_set);
 
 	sets = new list<unsigned long long> [num_set];
+	belady_access = new map<int, unsigned long long> [num_set];
 
 	miss = 0;
 	hit = 0;
@@ -93,11 +94,62 @@ void CACHE::add_data(unsigned long long address)
 	}
 	else
 	{
-		auto it = sets[set].end();
-		it--;
-		evicted_addr = *it;
-		sets[set].erase(it);
-		sets[set].push_front(address);
+		if (type == L2C)
+		{
+			auto it = sets[set].end();
+			it--;
+			evicted_addr = *it;
+			sets[set].erase(it);
+#if defined(belady_optimal)
+			sets[set].push_back(address);
+#else
+			sets[set].push_front(address);
+#endif
+		}
+		else
+		{
+#if defined(belady_optimal)
+			unsigned long long evict_addr;
+			int access_index, max_access_index = 0;
+			for(auto itr=sets[set].begin();itr!=sets[set].end();itr++)
+			{
+				auto itr1 = addr_index.find(*itr);
+				access_index = -1;
+				for (auto it = itr1->second.begin(); it != itr1->second.end(); ++it)
+				{
+					if(*it >= curr_memory_access)
+					{
+						access_index= *it;
+						if (it != itr1->second.begin())
+						{
+							it--;
+							itr1->second.erase(itr1->second.begin(), it);
+						}
+						break;
+					}
+				}
+				if(access_index == -1)
+				{
+					evict_addr = *itr;
+					break;
+				}
+				if (access_index > max_access_index)
+				{
+					max_access_index = access_index;
+					evict_addr = *itr;
+				}
+			}
+			evicted_addr = evict_addr;
+			sets[set].erase(find(sets[set].begin(), sets[set].end(), evict_addr));
+			sets[set].push_back(address);
+#else
+			auto it = sets[set].end();
+			it--;
+			evicted_addr = *it;
+			sets[set].erase(it);
+			sets[set].push_front(address);
+#endif
+		}
 	}
 
 	assert(sets[set].size() <= num_way);

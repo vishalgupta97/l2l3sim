@@ -3,7 +3,7 @@
 
 MEMORY_ACCESS* access_trace;
 int num_memory_access, curr_memory_access;
-map <unsigned long long, set <int> > addr_index;
+unordered_map<unsigned long long, set<int> > addr_index;
 CACHE l2, l3;
 
 void initialize()
@@ -49,9 +49,11 @@ void check_exclusive()
 void operate()
 {
 	set <int> addr_set;
+
 #ifdef belady_optimal
-	for (curr_memory_access = 0; curr_memory_access < num_memory_access; curr_memory_access++){
-                unsigned long long address = access_trace[curr_memory_access].addr;
+	for (curr_memory_access = 0; curr_memory_access < num_memory_access; curr_memory_access++)
+	{
+		unsigned long long address = access_trace[curr_memory_access].addr;
 		auto itr = addr_index.find(address);
 		if(itr == addr_index.end()){
 			addr_set.clear();
@@ -63,16 +65,10 @@ void operate()
 
 	}
 
-	map <unsigned long long, set <int> >::iterator itr;
+	unordered_map<unsigned long long, set<int> >::iterator itr;
 	int sum = 0;
 	for (itr = addr_index.begin(); itr != addr_index.end(); ++itr) {
         	sum += itr->second.size();
-		//cout<<"Address: " << itr->first<<endl;
-		for (auto it = itr->second.begin();it != itr->second.end(); ++it){
-			//cout<<*it<<" ";
-		}
-		//cout<<endl;
-
     }
     assert(sum==num_memory_access);
 
@@ -95,7 +91,9 @@ void operate()
 				if (l3.check_hit(address))
 				{
 					l3.hit++;
+#ifndef belady_optimal
 					l3.update_replacement_state(address);
+#endif
 					l2.add_data(address);
 
 #ifdef EXCLUSIVE
@@ -129,7 +127,7 @@ void operate()
 #ifdef EXCLUSIVE
 			check_exclusive();
 #endif
-			cout << curr_memory_access << endl;
+			cout << "Instruction Completed: " << curr_memory_access << endl;
 		}
 	}
 }
