@@ -173,9 +173,7 @@ int main(int argc, char** argv)
 
 			access_trace[num_memory_access].addr >>= LOG2_BLOCK_SIZE;
 
-#ifdef belady_optimal
 			unique_addr.insert(access_trace[num_memory_access].addr);
-#endif
 
 			num_memory_access++;
 		}

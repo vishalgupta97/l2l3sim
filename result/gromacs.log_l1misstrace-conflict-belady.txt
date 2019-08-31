@@ -1,49 +1,49 @@
 L2 INCLUSIVE of L3
 Belady at L3
-0
-100000
-200000
-300000
-400000
-500000
-600000
-700000
-800000
-900000
-1000000
-1100000
-1200000
-1300000
-1400000
-1500000
-1600000
-1700000
-1800000
-1900000
-2000000
-2100000
-2200000
-2300000
-2400000
-2500000
-2600000
-2700000
-2800000
-2900000
-3000000
-3100000
-3200000
-3300000
-3400000
-3500000
-3600000
-3700000
-3800000
-3900000
+Instruction Completed: 0
+Instruction Completed: 100000
+Instruction Completed: 200000
+Instruction Completed: 300000
+Instruction Completed: 400000
+Instruction Completed: 500000
+Instruction Completed: 600000
+Instruction Completed: 700000
+Instruction Completed: 800000
+Instruction Completed: 900000
+Instruction Completed: 1000000
+Instruction Completed: 1100000
+Instruction Completed: 1200000
+Instruction Completed: 1300000
+Instruction Completed: 1400000
+Instruction Completed: 1500000
+Instruction Completed: 1600000
+Instruction Completed: 1700000
+Instruction Completed: 1800000
+Instruction Completed: 1900000
+Instruction Completed: 2000000
+Instruction Completed: 2100000
+Instruction Completed: 2200000
+Instruction Completed: 2300000
+Instruction Completed: 2400000
+Instruction Completed: 2500000
+Instruction Completed: 2600000
+Instruction Completed: 2700000
+Instruction Completed: 2800000
+Instruction Completed: 2900000
+Instruction Completed: 3000000
+Instruction Completed: 3100000
+Instruction Completed: 3200000
+Instruction Completed: 3300000
+Instruction Completed: 3400000
+Instruction Completed: 3500000
+Instruction Completed: 3600000
+Instruction Completed: 3700000
+Instruction Completed: 3800000
+Instruction Completed: 3900000
 Total L2 accesses: 3927468
 Total unique accesses / Cold misses: 107963 percent: 2.74892
-L2 hits: 3109871
-L2 miss: 321640
-L3 hits: 178386
+L2 hits: 3100599
+L2 miss: 330912
+L3 hits: 187658
 L3 miss: 143254
 L3 back-invalidation requests: 110486

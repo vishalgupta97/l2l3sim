@@ -110,54 +110,10 @@ Instruction Completed: 10600000
 Instruction Completed: 10700000
 Instruction Completed: 10800000
 Instruction Completed: 10900000
-Instruction Completed: 11000000
-Instruction Completed: 11100000
-Instruction Completed: 11200000
-Instruction Completed: 11300000
-Instruction Completed: 11400000
-Instruction Completed: 11500000
-Instruction Completed: 11600000
-Instruction Completed: 11700000
-Instruction Completed: 11800000
-Instruction Completed: 11900000
-Instruction Completed: 12000000
-Instruction Completed: 12100000
-Instruction Completed: 12200000
-Instruction Completed: 12300000
-Instruction Completed: 12400000
-Instruction Completed: 12500000
-Instruction Completed: 12600000
-Instruction Completed: 12700000
-Instruction Completed: 12800000
-Instruction Completed: 12900000
-Instruction Completed: 13000000
-Instruction Completed: 13100000
-Instruction Completed: 13200000
-Instruction Completed: 13300000
-Instruction Completed: 13400000
-Instruction Completed: 13500000
-Instruction Completed: 13600000
-Instruction Completed: 13700000
-Instruction Completed: 13800000
-Instruction Completed: 13900000
-Instruction Completed: 14000000
-Instruction Completed: 14100000
-Instruction Completed: 14200000
-Instruction Completed: 14300000
-Instruction Completed: 14400000
-Instruction Completed: 14500000
-Instruction Completed: 14600000
-Instruction Completed: 14700000
-Instruction Completed: 14800000
-Instruction Completed: 14900000
-Instruction Completed: 15000000
-Instruction Completed: 15100000
-Instruction Completed: 15200000
-Instruction Completed: 15300000
-Total L2 accesses: 15388029
-Total unique accesses / Cold misses: 773054 percent: 5.02374
-L2 hits: 11620544
-L2 miss: 2990265
-L3 hits: 2050974
-L3 miss: 939291
-L3 back-invalidation requests: 906523
+Total L2 accesses: 10924045
+Total unique accesses / Cold misses: 122070 percent: 1.11744
+L2 hits: 2094657
+L2 miss: 8658788
+L3 hits: 5419717
+L3 miss: 3239071
+L3 back-invalidation requests: 3206303

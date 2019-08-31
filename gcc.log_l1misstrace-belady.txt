@@ -156,8 +156,8 @@ Instruction Completed: 15200000
 Instruction Completed: 15300000
 Total L2 accesses: 15388029
 Total unique accesses / Cold misses: 773054 percent: 5.02374
-L2 hits: 11620544
-L2 miss: 2990265
-L3 hits: 2050974
-L3 miss: 939291
-L3 back-invalidation requests: 906523
+L2 hits: 11610610
+L2 miss: 3000199
+L3 hits: 2024238
+L3 miss: 975961
+L3 back-invalidation requests: 943193

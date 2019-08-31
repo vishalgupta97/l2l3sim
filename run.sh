@@ -10,7 +10,7 @@ if [ ${1} = 6 ]; then
 		for cf in ${config[@]}
 		do
 			echo ${traces[${i}]} $cf
-			./bin/l2l3sim-$cf ${trace_dir}/${traces[${i}]} ${num_traces[${i}]} > ${traces[${i}]}-conflict.txt &
+			./bin/l2l3sim-$cf ${trace_dir}/${traces[${i}]} ${num_traces[${i}]} > ${traces[${i}]}-belady.txt &
 		done
 	done
 else
