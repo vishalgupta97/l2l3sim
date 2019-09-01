@@ -1,0 +1,51 @@
+How to build :-
+
+For building set associative cache, set L3 CACHE as 2048 and L3 way as 16 in inc/l2l3sim.h
+For building fully associative cache, set L3 CACHE as 1 and L3 way as 32768 in inc/l2l3sim.h
+
+Run build script for particular config :-
+
+Inclusive :- 	 ./build.sh inclusive
+Non-Inclusive :- ./build.sh noninclusive
+Exclusive :- 	 ./build.sh exclusive
+
+--------------------------------------------------------------------------------------------------------------------
+
+How to run :-
+
+./run.sh $num
+
+For running individual application, put $num as 0-5 and for running all application, put $num as 6.
+
+--------------------------------------------------------------------------------------------------------------------
+
+Description of output :-
+
+1) First line states the cache configuration (Inclusive, Exclusive and Non-Inclusive).
+2) Second line denotes replacement policy (LRU or Belady).
+3) Few lines contains the number of instruction executed. Its shows the progrss of simulation.
+4) After completion of simulation, Statistics contains cold misses, L2 hit and miss, L3 hit and miss.
+
+--------------------------------------------------------------------------------------------------------------------
+
+Description of files in result folder :-
+
+1) allconfig_setassociative.txt :- Contains cache miss numbers for allconfiguration (Inclusive, Exclusive and Non-Inclusive) and for all applications.
+2) *-conflict.txt :- Contains misses for fully associative inclusive cache with LRU policy.
+3) *-conflict-belady.txt :- Contains misses for fully associative inclusive cache with Belady policy. 
+4) *-belady.txt :- Contains misses for set associative inclusive cache with Belady policy.
+
+--------------------------------------------------------------------------------------------------------------------
+
+Simulation performance :-
+
+1) Set associative cache runs in under 5 minutes for all applications.
+2) Fully associative LRU cache runs in maximum of 1 hour for sphinx application with minimum around 20 minutes.
+3) Fully associative belady cache runs in maximum of 10 hours for sphinx application with minimum around 1 hour.
+
+--------------------------------------------------------------------------------------------------------------------
+
+Acknowledgements :-
+
+1) The idea of organizing code into classes, functions and Makefile is taken from CHAMPSIM.
+2) Arun KP for suggesting to use linked list instead of arrays for simulating LRU in fully associative cache. It brought down the simulation time from a maximum of 3 hours to 1 hour. 

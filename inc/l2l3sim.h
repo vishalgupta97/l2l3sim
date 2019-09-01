@@ -9,8 +9,8 @@ using namespace std;
 
 #define L2_SET 1024
 #define L2_WAY 8
-#define L3_SET 2048 // 2048
-#define L3_WAY 16 //16
+#define L3_SET 2048 // 1
+#define L3_WAY 16 // 32768
 
 #define belady_optimal // run belady's optimal algorithm on LLC
 		       // comment this to run LRU on LLC

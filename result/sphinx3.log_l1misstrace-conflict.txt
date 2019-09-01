@@ -111,7 +111,7 @@ LRU at L3
 10800000
 10900000
 Total L2 accesses: 10924045
-Total unique accesses / Cold misses: 0 percent: 0
+Total unique accesses / Cold misses: 122070 percent: 1.11744
 L2 hits: 1934520
 L2 miss: 8818925
 L3 hits: 431677
