@@ -13,6 +13,8 @@ Exclusive :- 	 ./build.sh exclusive
 
 How to run :-
 
+Either put the traces in "traces" directory inside this repo or change the location in "trace_dir" variable of run.sh file. 
+
 ./run.sh $num
 
 For running individual application, put $num as 0-5 and for running all application, put $num as 6.
